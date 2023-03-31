@@ -1,33 +1,33 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from scapy import *
-import argparse
-
-parse = argparse.ArgumentParse()
-parse.add_argument("-r", "--rango", help="Rango de direcciones a escanear")
-parse = parse.parse_args()
+import sys
+from scapy.all import *
+import subprocess
 
 
-def ip_scan(ip):
-    range_ip = ARP(pdst=ip)  # pdst = IP destino
-    broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")  # dst = Destino MAC
-    packet = broadcast/range_ip  # Unimos los dos paquetes
+def get_os(ip):
+    try:
+        ans, unans = sr(IP(dst=ip)/TCP(dport=80, flags="S"), timeout=10)
 
-    # Enviamos el paquete y recibimos la respuesta
-    response = srp(packet, timeout=3, verbose=False)[0]
+        if ans:
+            output = subprocess.check_output(
+                ['p0f', '-r', '-'], input=bytes(ans[0][1]), stderr=subprocess.PIPE)
 
-    for n in response:
-        # psrc = IP fuente | hwsrc = MAC fuente
-        print(n[1].psrc + " - " + n[1].hwsrc)
+            os = output.decode().split(';')
+            os_name = os[0]
+            os_version = os[1]
+            os_vendor = os[2]
+
+            print(
+                f"Sistema operativo detectado: {os_name} {os_version} ({os_vendor})")
+        else:
+            print("No se recibió ninguna respuesta")
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        sys.exit(1)
 
 
-def main():
-    if parse.rango:
-        ip_scan(parse.rango)
-    else:
-        print("Especifique un rango de direcciones a escanear")
+ip = input("Introduce la dirección IP de la máquina que quieres escanear: ")
 
-
-if __name__ == '__main__':
-    main()
+get_os(ip)
