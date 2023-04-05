@@ -4,6 +4,47 @@
 import http.client
 import ipaddress
 
+# Diccionario de sistema operativo y versiones de Apache
+SO_APACHE_DICT = {
+    '2.4.48': ('Ubuntu 18.04 x64', None, 'Apache'),
+    '2.4.48-openssl-1.1.1k': ('Ubuntu 18.04 x64', None, 'Apache'),
+    '2.4.48-openssl-1.1.1l': ('Ubuntu 18.04 x64', None, 'Apache'),
+    '2.4.49': ('Ubuntu 18.04 x64', None, 'Apache'),
+    '2.4.50': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64', None, 'Apache'),
+    '2.4.50-openssl-1.1.1k': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64', None, 'Apache'),
+    '2.4.50-openssl-1.1.1l': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64', None, 'Apache'),
+    '2.4.51': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64 | Ubuntu 21.10 x64', None, 'Apache'),
+    '2.4.51-openssl-1.1.1k': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64 | Ubuntu 21.10 x64', None, 'Apache'),
+    '2.4.51-openssl-1.1.1l': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64 | Ubuntu 21.10 x64', None, 'Apache'),
+    '2.4.52': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64 | Ubuntu 21.10 x64', None, 'Apache'),
+    '2.4.52-openssl-1.1.1k': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64 | Ubuntu 21.10 x64', None, 'Apache'),
+    '2.4.52-openssl-1.1.1l': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64 | Ubuntu 21.10 x64', None, 'Apache'),
+    '2.4.54': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64 | Ubuntu 21.10 x64', None, 'Apache'),
+    '2.4.54-openssl-1.1.1k': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64 | Ubuntu 21.10 x64', None, 'Apache'),
+    '2.4.54-openssl-1.1.1l': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64 | Ubuntu 21.10 x64', None, 'Apache'),
+    '2.4.57': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64 | Ubuntu 21.10 x64', None, 'Apache'),
+    '2.4.57-openssl-1.1.1k': ('Ubuntu 18.04 x64 | Ubuntu 20.04 x64', None, 'Apache'),
+    '2.4.48': ('Windows 7 x86', None, 'Apache'),
+    '2.4.48-openssl-1.1.1k': ('Windows 7 x86', None, 'Apache'),
+    '2.4.48-openssl-1.1.1l': ('Windows 7 x86', None, 'Apache'),
+    '2.4.49': ('Windows 7 x86', None, 'Apache'),
+    '2.4.50': ('Windows 8 x86 | Windows 10 x86', None, 'Apache'),
+    '2.4.50-openssl-1.1.1k': ('Windows 8 x86 | Windows 10 x86', None, 'Apache'),
+    '2.4.50-openssl-1.1.1l': ('Windows 8 x86 | Windows 10 x86', None, 'Apache'),
+    '2.4.51': ('Windows 8 x86 | Windows 10 x86 | Windows 11 x86', None, 'Apache'),
+    '2.4.51-openssl-1.1.1k': ('Windows 8 x86 | Windows 10 x86 | Windows 11 x86', None, 'Apache'),
+    '2.4.51-openssl-1.1.1l': ('Windows 8 x86 | Windows 10 x86 | Windows 11 x86', None, 'Apache'),
+    '2.4.52': ('Windows 8 x86 | Windows 10 x86 | Windows 11 x86', None, 'Apache'),
+    '2.4.52-openssl-1.1.1k': ('Windows 8 x86 | Windows 10 x86 | Windows 11 x86', None, 'Apache'),
+    '2.4.52-openssl-1.1.1l': ('Windows 8 x86 | Windows 10 x86 | Windows 11 x86', None, 'Apache'),
+    '2.4.54': ('Windows 8 x86 | Windows 10 x86 | Windows 11 x86', None, 'Apache'),
+    '2.4.54-openssl-1.1.1k': ('Windows 8 x86 | Windows 10 x86 | Windows 11 x86', None, 'Apache'),
+    '2.4.54-openssl-1.1.1l': ('Windows 8 x86 | Windows 10 x86 | Windows 11 x86', None, 'Apache'),
+    '2.4.57': ('Windows 8 x86 | Windows 10 x86 | Windows 11 x86', None, 'Apache'),
+    '2.4.57-openssl-1.1.1k': ('Windows 8 x86 | Windows 10 x86', None, 'Apache'),
+}
+
+
 def get_version_apache(ip_addr):
     # Constantes que vamos a utilizar
     HTTP_PORT = 80
@@ -32,16 +73,13 @@ def get_version_apache(ip_addr):
                     so_apache = server.split('(')[1].split(')')[0]
                     break
 
-            if version_apache >= '2.4.41' and version_apache < '2.4.50' and so_apache == 'Win64':
-                so = 'Windows 7 x64'
-            elif version_apache >= '2.4.41' and version_apache < '2.4.50' and so_apache == 'Win32':
-                so = 'Windows 7 x86'
-            elif version_apache >= '2.4.50' and so_apache == 'Win64':
-                so = 'Windows 8 x64 | Windows 10 x64'
-            elif version_apache >= '2.4.50' and so_apache == 'Win32':
-                so = 'Windows 8 x86 | Windows 10 x86'
-            elif version_apache >= '2.4.50' and so_apache == 'Debian':
-                so = 'Debian Linux'
+            # Buscamos la versión de Apache correspondiente en el diccionario
+            for so, versiones in SO_APACHE_DICT.items():
+                v_min, v_max, so_apache_dicc = versiones
+                if (so_apache_dicc == so_apache and 
+                    (v_min is None or version_apache >= v_min) and
+                    (v_max is None or version_apache < v_max)):
+                    break
             else:
                 so = 'Sistema operativo no soportado'
 
