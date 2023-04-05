@@ -4,7 +4,7 @@
 import http.client
 import ipaddress
 
-# Diccionario de sistema operativo y versiones de Apache
+
 SO_APACHE_DICT = {
     '2.4.48': ('Ubuntu 18.04 x64', None, 'Apache'),
     '2.4.48-openssl-1.1.1k': ('Ubuntu 18.04 x64', None, 'Apache'),
@@ -46,14 +46,13 @@ SO_APACHE_DICT = {
 
 
 def get_version_apache(ip_addr):
-    # Constantes que vamos a utilizar
     HTTP_PORT = 80
     HTTP_OK = 200
     HTTP_REDIRECT = 302
     HTTP_UNAUTHORIZED = 401
 
     try:
-        cnx = http.client.HTTPConnection(ip_addr, HTTP_PORT) # Abrimos la conexion
+        cnx = http.client.HTTPConnection(ip_addr, HTTP_PORT) 
         cnx.request('GET', '/')
         res = cnx.getresponse()
         headers = res.getheaders()
@@ -73,7 +72,6 @@ def get_version_apache(ip_addr):
                     so_apache = server.split('(')[1].split(')')[0]
                     break
 
-            # Buscamos la versión de Apache correspondiente en el diccionario
             for so, versiones in SO_APACHE_DICT.items():
                 v_min, v_max, so_apache_dicc = versiones
                 if (so_apache_dicc == so_apache and 
@@ -92,7 +90,7 @@ def get_version_apache(ip_addr):
     except http.client.HTTPException as e:
         print(f"Error en al conectarse al servidor: {e}")
     finally:
-        cnx.close() # Cerramos la conexion
+        cnx.close() 
 
 
 def verificar_ip(ip_addr):
