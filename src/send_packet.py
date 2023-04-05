@@ -6,6 +6,23 @@ import ipaddress
 
 
 SO_APACHE_DICT = {
+    '2.2.31': ('Windows Server 2003 x64 | Windows Vista x64 | Windows 7 x64 | Windows Server 2008 x64 | Windows Server 2008 R2 x64', None, 'Apache'),
+    '2.2.34': ('Windows Server 2003 x64 | Windows Vista x64 | Windows 7 x64 | Windows Server 2008 x64 | Windows Server 2008 R2 x64', None, 'Apache'),
+    '2.4.4': ('Windows 7 x64 | Windows Server 2008 R2 x64', None, 'Apache'),
+    '2.4.6': ('Windows 7 x64 | Windows Server 2008 R2 x64', None, 'Apache'),
+    '2.4.10': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64', None, 'Apache'),
+    '2.4.16': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64', None, 'Apache'),
+    '2.4.23': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64', None, 'Apache'),
+    '2.4.25': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64', None, 'Apache'),
+    '2.4.27': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64', None, 'Apache'),
+    '2.4.29': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64 | Windows 10 x64 | Windows Server 2016 x64', None, 'Apache'),
+    '2.4.33': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64 | Windows 10 x64 | Windows Server 2016 x64', None, 'Apache'),
+    '2.4.38': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64 | Windows 10 x64 | Windows Server 2016 x64 | Windows Server 2019 x64', None, 'Apache'),
+    '2.4.46': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64 | Windows 10 x64 | Windows Server 2016 x64 | Windows Server 2019 x64', None, 'Apache'),
+    '2.4.48': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64 | Windows 10 x64 | Windows Server 2016 x64 | Windows Server 2019 x64', None, 'Apache'),
+    '2.4.49': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64 | Windows 10 x64 | Windows Server 2016 x64 | Windows Server 2019 x64', None, 'Apache'),
+    '2.4.51': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64 | Windows 10 x64 | Windows Server 2016 x64 | Windows Server 2019 x64', None, 'Apache'),
+    '2.4.52': ('Windows 7 x64 | Windows Server 2008 R2 x64 | Windows 8 x64 | Windows Server 2012 x64 | Windows 8.1 x64 | Windows Server 2012 R2 x64 | Windows 10 x64 | Windows Server 2016 x64 | Windows Server 2019 x64', None, 'Apache'),
     '2.4.48': ('Ubuntu 18.04 x64', None, 'Apache'),
     '2.4.48-openssl-1.1.1k': ('Ubuntu 18.04 x64', None, 'Apache'),
     '2.4.48-openssl-1.1.1l': ('Ubuntu 18.04 x64', None, 'Apache'),
