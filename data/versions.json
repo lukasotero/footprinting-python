@@ -1,5 +1,4 @@
 {
-    "VERSIONS": {
         "2.2.31": ["Windows Server 2003 x64 | Windows Vista x64 | Windows 7 x64 | Windows Server 2008 x64 | Windows Server 2008 R2 x64"],
         "2.2.34": ["Windows Server 2003 x64 | Windows Vista x64 | Windows 7 x64 | Windows Server 2008 x64 | Windows Server 2008 R2 x64"],
         "2.4.4": ["Windows 7 x64 | Windows Server 2008 R2 x64"],
@@ -35,5 +34,4 @@
         "2.4.57-openssl-1.1.1k": ["Windows 8 x86 | Windows 10 x86"],
         "2.4.37": ["Ubuntu 14.04 LTS x64 | Debian 7 x64 | CentOS 4 x64"],
         "2.4.39": ["Ubuntu 16.04 LTS x64 | Debian 8 x64 | CentOS 5 x64"]
-    }
 }
