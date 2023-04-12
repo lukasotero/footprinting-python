@@ -7,7 +7,7 @@ import json
 
 def get_version_apache(ip_addr):
     # Constantes que vamos a utilizar
-    HTTP_PORT = 80
+    HTTP_PORT = 8081
     HTTP_OK = 200
     HTTP_REDIRECT = 302
     HTTP_UNAUTHORIZED = 401
