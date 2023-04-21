@@ -5,10 +5,9 @@ import http.client
 import ipaddress
 import json 
 
-def get_apache(ip_addr):
+def get_apache(ip_addr, port):
 
     # Constantes que vamos a utilizar
-    HTTP_PORT = 80 # Puerto donde va a estar el servidor Apache, se puede cambiar
     HTTP_OK = 200
     HTTP_REDIRECT = 302
     HTTP_UNAUTHORIZED = 401
@@ -17,7 +16,7 @@ def get_apache(ip_addr):
         data = json.load(f)
 
     try:
-        cnx = http.client.HTTPConnection(ip_addr, HTTP_PORT) # Abrimos la conexion
+        cnx = http.client.HTTPConnection(ip_addr, port) # Abrimos la conexion
         cnx.request('GET', '/')
         res = cnx.getresponse()
         headers = res.getheaders()
@@ -33,9 +32,13 @@ def get_apache(ip_addr):
             for header in headers:
                 if header[0] == 'Server':
                     server = header[1]
-                    print(f"Server: {server}") # Esta linea es solo para testear
+                    # print(f"Server: {server}")
                     version_apache = server.split('/')[1].split(' ')[0]
                     so_apache = server.split('(')[1].split(')')[0]
+                    
+                    # if server == None:
+                    #     print(f'No hay un servidor Apache corriendo en el puerto {port}')
+
                     break
 
             for version in data:
@@ -43,6 +46,8 @@ def get_apache(ip_addr):
                     so = data[version][0]
                     version_apache = version.split('-')[0]
                     break
+            
+            
             else:
                 so = 'Sistema operativo no soportado'
                 version_apache = 'Versión de Apache no soportada'
@@ -51,6 +56,7 @@ def get_apache(ip_addr):
 
         elif status_cod == HTTP_UNAUTHORIZED:
             print('Cliente no autorizado para acceder al recurso solicitado')
+
 
         print('\n+------------------------------+')
     except http.client.HTTPException as e:
@@ -68,5 +74,6 @@ def verificar_ip(ip_addr):
 
 if __name__ == '__main__':
     ip_addr = input('Dirección IPv4 o IPv6 del host: ')
+    port = input('Puerto donde está corriendo el Apache: ')
     verificar_ip(ip_addr)
-    get_apache(ip_addr)
+    get_apache(ip_addr, port)
