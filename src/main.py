@@ -5,7 +5,7 @@
 
 import http.client
 import ipaddress
-import json 
+import json
 
 def get_apache(ip_addr, port):
 
@@ -20,11 +20,11 @@ def get_apache(ip_addr, port):
 
     # Crea una conexión HTTP con el servidor Apache utilizando la dirección IP ip_addr y el puerto HTTP_PORT.
     try:
-        cnx = http.client.HTTPConnection(ip_addr, port) # Abrimos la conexion
-        cnx.request('GET', '/') # Realiza una solicitud HTTP GET a la raíz del servidor Apache.
-        res = cnx.getresponse() # Obtiene la respuesta del servidor Apache.
-        headers = res.getheaders() # Obtiene los encabezados de la respuesta del servidor Apache.
-        status_cod = res.status # Obtiene el código de estado de la respuesta del servidor Apache.
+        cnx = http.client.HTTPConnection(ip_addr, port) # Abrimos la conexión
+        cnx.request('GET', '/') # Solicitud HTTP por método GET
+        res = cnx.getresponse() # Guarda la respuesta de esa solicitud
+        headers = res.getheaders() # Guarda los encabezados de la respuesta
+        status_cod = res.status # Guarda el código de estado de la respuesta
 
         print('\n+------------------------------+\n')
         print(f"Código de estado: {status_cod}\n")
@@ -34,6 +34,7 @@ def get_apache(ip_addr, port):
         if status_cod == HTTP_OK or HTTP_REDIRECT:
             version_apache = None
             so_apache = None
+            server = None
 
             # itera sobre los encabezados de la respuesta y si encuentra el encabezado Server, extrae la versión de Apache y el sistema operativo y los guarda en las variables correspondientes.
 
@@ -43,9 +44,6 @@ def get_apache(ip_addr, port):
                     # print(f"Server: {server}")
                     version_apache = server.split('/')[1].split(' ')[0]
                     so_apache = server.split('(')[1].split(')')[0]
-                    
-                    # if server == None:
-                    #     print(f'No hay un servidor Apache corriendo en el puerto {port}')
 
                     break
             
@@ -62,17 +60,16 @@ def get_apache(ip_addr, port):
                 so = 'Sistema operativo no soportado'
                 version_apache = 'Versión de Apache no soportada'
 
-            print(f"\nSistema operativo: {so}") 
+            print(f"Sistema operativo: {so}") 
 
         elif status_cod == HTTP_UNAUTHORIZED:
             print('Cliente no autorizado para acceder al recurso solicitado')
-
 
         print('\n+------------------------------+')
     except http.client.HTTPException as e:
         print(f"Error en al conectarse al servidor: {e}")
     finally:
-        cnx.close() # Cerramos la conexion
+        cnx.close() # Cerramos la conexión
 
     # Recibe como parámetro una dirección IP y se encarga de verificar si la dirección es una dirección IP válida
     def verificar_ip(ip_addr):
