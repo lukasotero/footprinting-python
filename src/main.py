@@ -3,7 +3,7 @@
 
 import http.client
 import ipaddress
-import json 
+import json
 
 def get_apache(ip_addr, port):
 
@@ -16,11 +16,11 @@ def get_apache(ip_addr, port):
         data = json.load(f)
 
     try:
-        cnx = http.client.HTTPConnection(ip_addr, port) # Abrimos la conexion
-        cnx.request('GET', '/')
-        res = cnx.getresponse()
-        headers = res.getheaders()
-        status_cod = res.status
+        cnx = http.client.HTTPConnection(ip_addr, port) # Abrimos la conexión
+        cnx.request('GET', '/') # Solicitud HTTP por método GET
+        res = cnx.getresponse() # Guarda la respuesta de esa solicitud
+        headers = res.getheaders() # Guarda los encabezados de la respuesta
+        status_cod = res.status # Guarda el código de estado de la respuesta
 
         print('\n+------------------------------+\n')
         print(f"Código de estado: {status_cod}\n")
@@ -28,6 +28,7 @@ def get_apache(ip_addr, port):
         if status_cod == HTTP_OK or HTTP_REDIRECT:
             version_apache = None
             so_apache = None
+            server = None
 
             for header in headers:
                 if header[0] == 'Server':
@@ -35,9 +36,6 @@ def get_apache(ip_addr, port):
                     # print(f"Server: {server}")
                     version_apache = server.split('/')[1].split(' ')[0]
                     so_apache = server.split('(')[1].split(')')[0]
-                    
-                    # if server == None:
-                    #     print(f'No hay un servidor Apache corriendo en el puerto {port}')
 
                     break
 
@@ -52,17 +50,16 @@ def get_apache(ip_addr, port):
                 so = 'Sistema operativo no soportado'
                 version_apache = 'Versión de Apache no soportada'
 
-            print(f"\nSistema operativo: {so}") 
+            print(f"Sistema operativo: {so}") 
 
         elif status_cod == HTTP_UNAUTHORIZED:
             print('Cliente no autorizado para acceder al recurso solicitado')
-
 
         print('\n+------------------------------+')
     except http.client.HTTPException as e:
         print(f"Error en al conectarse al servidor: {e}")
     finally:
-        cnx.close() # Cerramos la conexion
+        cnx.close() # Cerramos la conexión
 
 
 def verificar_ip(ip_addr):
