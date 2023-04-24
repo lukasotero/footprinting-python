@@ -4,10 +4,11 @@ Desarrollar un script capaz de identificar las marcas o huellas de los servidore
 
 ## Configuraciones previas :gear:
 :point_right: Verificar que la libreria de ipadress este instalada en tu entorno, ya que el proyecto no cuenta con un entorno virtual.<br>
+:point_right: Verificar que el firewall no esté bloqueando el puerto correspondiente.<br>
 
 ## Notas :notebook:
 El archivo requirements.txt sirve para instalar de forma automática las librerías necesarias para el funcionamiento del programa:
 
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
