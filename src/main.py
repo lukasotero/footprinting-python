@@ -33,7 +33,7 @@ def get_apache(ip_addr, port):
                 if header[0] == 'Server':
                     server = header[1]
                     version_apache = server.split('/')[1].split(' ')[0]
-                    print(f"Versión de Apache: {version_apache}\n")
+                    # print(f"Versión de Apache: {version_apache}\n")
                     so_apache = server.split('(')[1].split(')')[0]
                     break
             for version in data:
