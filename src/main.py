@@ -16,11 +16,11 @@ def get_apache(ip_addr, port):
         data = json.load(f)
 
     try:
-        cnx = http.client.HTTPConnection(ip_addr, port) # Abrimos la conexion
-        cnx.request('GET', '/')
-        res = cnx.getresponse()
-        headers = res.getheaders()
-        status_cod = res.status
+        cnx = http.client.HTTPConnection(ip_addr, port) # Abrimos la conexión
+        cnx.request('GET', '/') # Solicitud HTTP por método GET
+        res = cnx.getresponse() # Guarda la respuesta de esa solicitud
+        headers = res.getheaders() # Guarda los encabezados de la respuesta
+        status_cod = res.status # Guarda el código de estado de la respuesta
 
         print('\n+------------------------------+\n')
         print(f"Código de estado: {status_cod}\n")
@@ -32,7 +32,6 @@ def get_apache(ip_addr, port):
             for header in headers:
                 if header[0] == 'Server':
                     server = header[1]
-                    # print(f"Server: {server}")
                     version_apache = server.split('/')[1].split(' ')[0]
                     so_apache = server.split('(')[1].split(')')[0]
                     break
