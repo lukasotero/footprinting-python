@@ -33,7 +33,7 @@ def get_apache(ip_addr, port):
                 if header[0] == 'Server':
                     server = header[1]
                     version_apache = server.split('/')[1].split(' ')[0]
-                    # print(f"Versión de Apache: {version_apache}\n")
+                    # print(f"Versión de Apache: {version_apache}")
                     so_apache = server.split('(')[1].split(')')[0]
                     break
             for version in data:
@@ -47,7 +47,7 @@ def get_apache(ip_addr, port):
                 so = 'Sistema operativo no soportado'
                 version_apache = 'Versión de Apache no soportada'
 
-            print(f"Sistema operativo: {so}") 
+            print(f"\nSistema operativo: {so}") 
 
         elif status_cod == HTTP_UNAUTHORIZED:
             print('Cliente no autorizado para acceder al recurso solicitado')
