@@ -23,7 +23,7 @@ def get_apache(ip_addr, port):
         status_cod = res.status # Guarda el código de estado de la respuesta
 
         print('\n+------------------------------+\n')
-        print(f"Código de estado: {status_cod}\n")
+        print(f"Código de estado: {status_cod}")
 
         if status_cod == HTTP_OK or HTTP_REDIRECT:
             version_apache = None
@@ -33,6 +33,7 @@ def get_apache(ip_addr, port):
                 if header[0] == 'Server':
                     server = header[1]
                     version_apache = server.split('/')[1].split(' ')[0]
+                    print(f"Versión de Apache: {version_apache}\n")
                     so_apache = server.split('(')[1].split(')')[0]
                     break
             for version in data:
