@@ -32,7 +32,6 @@ def get_apache(ip_addr, port):
                 if header[0] == 'Server':
                     server = header[1]
                     dist_so = server.split('(')[1].split(')')[0]
-                    print(f"Server: {server}")
                     break
 
             for version in data:
