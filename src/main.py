@@ -22,15 +22,26 @@ def get_apache(ip_addr, port):
         headers = res.getheaders() # Guarda los encabezados de la respuesta
         status_cod = res.status # Guarda el código de estado de la respuesta
 
-        print('\n+------------------------------+\n')
+        print('\n+------------------------------+')
         print(f"Código de estado: {status_cod}")
 
         if status_cod == HTTP_OK or HTTP_REDIRECT:
-            server = None
-
             for header in headers:
                 if header[0] == 'Server':
                     server = header[1]
+
+                    if 'Apache' in server:
+                        version_apache = server.split('/')[1].split(' ')[0]
+                        print(f"Apache: {version_apache}")
+
+                    if 'PHP' in server:
+                        version_php = server.split('PHP/')[1].split(' ')[0]
+                        print(f"PHP: {version_php}")
+
+                    if 'SSL' in server:
+                        version_ssl = server.split('SSL/')[1].split(' ')[0]
+                        print(f"SSL: {version_ssl}")
+
                     dist_so = server.split('(')[1].split(')')[0]
                     break
 
@@ -40,14 +51,14 @@ def get_apache(ip_addr, port):
                     break
             
             else:
-                so = 'Sistema operativo no agregado al diccionario'
+                so = 'No agregado al diccionario'
 
             print(f"\nSistema operativo: {so}") 
 
         elif status_cod == HTTP_UNAUTHORIZED:
             print('Cliente no autorizado para acceder al recurso solicitado')
 
-        print('\n+------------------------------+')
+        print('+------------------------------+')
     except http.client.HTTPException as e:
         print(f"Error en al conectarse al servidor: {e}")
     finally:
