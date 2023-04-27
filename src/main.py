@@ -26,26 +26,22 @@ def get_apache(ip_addr, port):
         print(f"Código de estado: {status_cod}")
 
         if status_cod == HTTP_OK or HTTP_REDIRECT:
-            version_apache = None
-            so_apache = None
+            server = None
 
             for header in headers:
                 if header[0] == 'Server':
                     server = header[1]
-                    version_apache = server.split('/')[1].split(' ')[0]
-                    # print(f"Versión de Apache: {version_apache}")
-                    so_apache = server.split('(')[1].split(')')[0]
+                    dist_so = server.split('(')[1].split(')')[0]
+                    print(f"Server: {server}")
                     break
+
             for version in data:
-                if version_apache in version:
+                if dist_so in version:
                     so = data[version][0]
-                    version_apache = version.split('-')[0]
                     break
-            
             
             else:
-                so = 'Sistema operativo no soportado'
-                version_apache = 'Versión de Apache no soportada'
+                so = 'Sistema operativo no agregado al diccionario'
 
             print(f"\nSistema operativo: {so}") 
 
