@@ -1,10 +1,13 @@
 {
         "Win32": ["Windows de 32 bits"],
         "Win64": ["Windows de 64 bits"],
-        "Ubuntu": ["Ubuntu"],
-        "Debian": ["Linux basado en Debian"],
-        "CentOS": ["CentOS"],
-        "Red Hat": ["Red Hat"],
-        "Fedora": ["Fedora"],
+        "Ubuntu": ["Ubuntu Debian GNU/Linux"],
+        "Debian": ["Debian GNU/Linux"],
+        "CentOS": ["CentOS GNU/Linux Red Hat Enterprise"],
+        "Red Hat": ["Red Hat GNU/Linux"],
+        "RHEL": ["Red Hat GNU/Linux"],
+        "Fedora": ["Fedora GNU/Linux"],
+        "FreeBSD": ["FreeBSD BSD-Lite/Unix"],
+        "Linux/SUSE": ["SUSE Linux"],
         "macOS": ["macOS"]
 }
